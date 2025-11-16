@@ -10,7 +10,7 @@ Copy-move forgery is a type of image manipulation where a region of an image is 
 
 ### Virtual Environment
 
-This project uses a Python virtual environment for dependency management. **Always activate the venv before working on this project.**
+This project uses a Python virtual environment for dependency management. The virtual environment must be activated before running any project code.
 
 #### Activating the Virtual Environment
 
@@ -24,7 +24,7 @@ source venv/bin/activate
 venv\Scripts\activate
 ```
 
-When activated, you should see `(venv)` in your terminal prompt.
+The terminal prompt displays `(venv)` when the virtual environment is active.
 
 #### Deactivating the Virtual Environment
 
@@ -34,17 +34,17 @@ deactivate
 
 #### Installing Dependencies
 
-After activating the venv, install required packages:
+With the virtual environment activated, dependencies are installed using:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-(If `requirements.txt` doesn't exist yet, create it with your project dependencies)
+The `requirements.txt` file contains all project dependencies.
 
 #### Creating/Recreating the Virtual Environment
 
-If you need to recreate the virtual environment:
+To recreate the virtual environment:
 
 ```bash
 # Remove old venv (if exists)
@@ -219,12 +219,14 @@ pip install -r requirements.txt
 
 ## Recommended Pipeline
 
-1. **Preprocessing**: Normalize image, convert to grayscale (if needed)
-2. **Feature Extraction**: Choose method based on image characteristics
-3. **Feature Matching**: Use ratio test and geometric filtering
-4. **Clustering**: Group matched features spatially
-5. **Region Detection**: Extract boundaries of tampered regions
-6. **Post-processing**: Refine and visualize results
+The standard detection pipeline consists of:
+
+1. **Preprocessing**: Image normalization and optional grayscale conversion
+2. **Feature Extraction**: Method selection based on image characteristics
+3. **Feature Matching**: Ratio test and geometric filtering applied
+4. **Clustering**: Spatial grouping of matched features
+5. **Region Detection**: Boundary extraction of tampered regions
+6. **Post-processing**: Result refinement and visualization
 
 ## Tool Recommendations
 
@@ -234,6 +236,88 @@ pip install -r requirements.txt
 - **Matplotlib**: Visualization
 - **scikit-learn**: Clustering algorithms (DBSCAN)
 
+## Machine Learning Approaches
+
+### Supervised Learning Methods
+
+Supervised learning approaches for copy-move forgery detection require labeled datasets with ground truth annotations.
+
+#### CNN-Based Detection
+- **Patch-Based CNNs**: Training convolutional neural networks on image patches to classify tampered and authentic regions
+- **Fully Convolutional Networks (FCN)**: Pixel-level segmentation networks for precise region localization
+- **Encoder-Decoder Architectures**: U-Net and similar architectures for boundary detection
+- **Siamese Networks**: Learning similarity metrics between image regions to identify copied areas
+
+#### Transfer Learning
+- **Pre-trained Feature Extractors**: Using ImageNet pre-trained CNNs (VGG, ResNet, EfficientNet) as feature extractors
+- **Fine-tuning**: Adapting pre-trained models on forensic-specific datasets
+- **Multi-task Learning**: Joint training for detection and localization
+
+#### Hybrid Supervised Methods
+- **Traditional + CNN Features**: Combining handcrafted features (SIFT, SURF) with learned CNN features
+- **Ensemble Methods**: Stacking multiple CNN models with traditional feature-based methods
+
+### Unsupervised Learning Methods
+
+Unsupervised approaches do not require labeled training data, making them suitable for scenarios with limited ground truth.
+
+#### Autoencoders
+- **Variational Autoencoders (VAE)**: Learning normal image representations to identify anomalies
+- **Convolutional Autoencoders**: Reconstructing images and detecting inconsistencies in reconstruction errors
+- **Adversarial Autoencoders**: Using adversarial training to learn robust feature representations
+
+#### Self-Supervised Learning
+- **Contrastive Learning**: Learning representations by contrasting similar and dissimilar image patches
+- **Rotation/Transformation Prediction**: Pretext tasks for feature learning without labels
+- **Masked Image Modeling**: Similar to vision transformers, predicting masked regions
+
+#### Clustering-Based Methods
+- **Feature Clustering**: Using unsupervised clustering (K-means, DBSCAN) on learned features
+- **Spectral Clustering**: Grouping similar regions in feature space
+- **Graph Neural Networks**: Unsupervised graph-based methods for region grouping
+
+### Semi-Supervised Methods
+
+Leveraging both labeled and unlabeled data for improved performance.
+
+- **Pseudo-labeling**: Generating labels for unlabeled data using model predictions
+- **Consistency Regularization**: Enforcing consistency across different augmentations
+- **Co-training**: Training multiple models on different feature views
+
+### Deep Learning Architectures
+
+#### Detection Networks
+- **YOLO-style Networks**: Single-stage detectors for real-time copy-move detection
+- **Faster R-CNN**: Two-stage detection with region proposal networks
+- **Mask R-CNN**: Instance segmentation for precise region boundaries
+
+#### Attention Mechanisms
+- **Self-Attention**: Identifying self-similarities within images
+- **Spatial Attention**: Focusing on suspicious regions
+- **Transformer-Based Models**: Vision Transformers (ViT) adapted for copy-move detection
+
+### Advantages of ML/CNN Approaches
+
+- **Automatic Feature Learning**: No manual feature engineering required
+- **Robustness**: Better handling of post-processing attacks (compression, blur, rotation)
+- **End-to-End Learning**: Direct mapping from images to detection masks
+- **Generalization**: Potential for handling various tampering scenarios
+
+### Limitations of ML/CNN Approaches
+
+- **Data Requirements**: Large labeled datasets needed for supervised methods
+- **Computational Cost**: Training and inference can be computationally expensive
+- **Interpretability**: Less interpretable than traditional feature-based methods
+- **Overfitting Risk**: May not generalize well to unseen manipulation types
+
+### Hybrid Approaches
+
+Combining traditional feature-based methods with machine learning:
+
+- **Feature Extraction + Classifier**: Using traditional features (SIFT, SURF) with ML classifiers (SVM, Random Forest, Neural Networks)
+- **CNN Feature Extraction**: Replacing handcrafted features with CNN-extracted features in traditional pipelines
+- **Ensemble Methods**: Combining predictions from both traditional and deep learning models
+
 ## Research Directions
 
 - **Deep Learning**: End-to-end copy-move detection networks
@@ -241,6 +325,8 @@ pip install -r requirements.txt
 - **Transformers**: Self-similarity detection in images
 - **Multi-modal Features**: Combine traditional and learned features
 - **Robustness**: Handling post-processing (blur, compression, rotation)
+- **Few-Shot Learning**: Adapting models to new manipulation types with minimal data
+- **Domain Adaptation**: Transferring knowledge across different image domains
 
 ## Usage
 
@@ -248,10 +334,12 @@ pip install -r requirements.txt
 
 ## Contributing
 
-1. Always activate the virtual environment before making changes
-2. Install/update dependencies using `pip install -r requirements.txt`
-3. Test your changes before committing
-4. Follow the project's coding standards
+Contributions follow standard development practices:
+
+1. Virtual environment activation before making changes
+2. Dependency management via `pip install -r requirements.txt`
+3. Testing of changes before committing
+4. Adherence to project coding standards
 
 ## License
 
