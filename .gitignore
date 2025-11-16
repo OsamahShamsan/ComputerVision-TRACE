@@ -1,0 +1,72 @@
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Jupyter Notebook checkpoints (but keep the notebooks themselves)
+.ipynb_checkpoints/
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+
+# Python package files
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+wheels/
+*.whl
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+
+# Type checking
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Environment variables
+.env
+.env.local
+
+# Model files and large data (uncomment if you have large model files)
+# *.pth
+# *.pt
+# *.h5
+# *.ckpt
+# *.pb
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Keep notebooks, images, and explanations
+!*.ipynb
+!**/images/
+!explanations/
