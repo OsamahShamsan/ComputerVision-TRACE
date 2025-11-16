@@ -343,5 +343,4 @@ Contributions follow standard development practices:
 
 ## License
 
-*Add license information here*
 
