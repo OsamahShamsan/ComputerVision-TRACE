@@ -8,7 +8,28 @@ Copy-move forgery is a type of image manipulation where a region of an image is 
 
 ## Setup
 
-### Virtual Environment
+### Quick Setup (Recommended)
+
+**On macOS/Linux:**
+Run the setup script to automatically create/activate the virtual environment and install all dependencies:
+
+```bash
+./setup.sh
+```
+
+The script will:
+- Create virtual environment if it doesn't exist (won't recreate if it exists)
+- Activate the virtual environment
+- Upgrade pip
+- Install all requirements from `requirements.txt`
+- Install ipykernel for Jupyter notebook support
+
+**On Windows:**
+Use the manual setup steps below.
+
+### Manual Setup
+
+#### Virtual Environment
 
 This project uses a Python virtual environment for dependency management. The virtual environment must be activated before running any project code.
 
@@ -41,6 +62,29 @@ pip install -r requirements.txt
 ```
 
 The `requirements.txt` file contains all project dependencies.
+
+**Note:** If you get a `ModuleNotFoundError` for packages like numpy, make sure you've activated the virtual environment and installed requirements.txt.
+
+#### Running Jupyter Notebooks
+
+Jupyter notebooks are used for development and experimentation. With the virtual environment activated:
+
+```bash
+# Launch Jupyter Notebook
+jupyter notebook
+
+# Or launch JupyterLab (alternative interface)
+jupyter lab
+```
+
+**Selecting the correct kernel:**
+When opening a notebook, make sure to select the kernel `venv (Python X.X.X)` from the kernel menu. This ensures the notebook uses the virtual environment with all installed packages.
+
+If the kernel doesn't appear:
+1. Make sure ipykernel is installed: `pip install ipykernel`
+2. Register the kernel: `python -m ipykernel install --user --name=venv --display-name "venv (Python $(python --version | cut -d' ' -f2))"`
+
+Notebooks are located in the `notebooks/` directory. The Jupyter interface opens in the default web browser.
 
 #### Creating/Recreating the Virtual Environment
 
@@ -330,7 +374,62 @@ Combining traditional feature-based methods with machine learning:
 
 ## Usage
 
-*Note: Usage instructions will be added as the implementation progresses.*
+### Running Experiments
+
+All experiments and code development are conducted in Jupyter notebooks located in the `notebooks/` directory.
+
+1. Activate the virtual environment
+2. Launch Jupyter: `jupyter notebook` or `jupyter lab`
+3. Open the desired notebook from the `notebooks/` directory
+4. Execute cells to run experiments and view results
+
+### Configuration
+
+Project parameters are managed through configuration files in the `configs/` directory. Modify these files to adjust experiment parameters without editing code directly.
+
+### Output Organization
+
+- Processed data: `data/processed/`
+- Experiment results: `data/results/`
+- Generated visualizations: `outputs/`
+- Saved models: `models/`
+
+### Dataset Setup
+
+Place your raw dataset in the `data/raw/` directory. The data setup notebook will:
+
+1. Inspect dataset structure and statistics
+2. Find image-ground truth pairs
+3. Split dataset into train/val/test sets
+4. Organize processed data in workspace
+
+**To use the data setup notebook**:
+- Open `notebooks/01_data_inspection_and_setup.ipynb`
+- Ensure raw data is in `data/raw/` directory
+- Run cells to process and organize dataset
+
+### Dataset Category Selection
+
+The FAU dataset contains many categories (30GB total). See `DATASET_GUIDE.md` for recommendations on which categories to download:
+
+- **Essential**: `nul`, `rot`, `scale` (~5-8GB)
+- **Recommended**: Add `cmb_easy1`, `lnoise`, `jpeg` (~10-15GB)
+- **Skip**: `orig`, `*_sd` patterns, `scale_down` (not needed for training)
+
+Configure category filtering in `configs/data_config.json` before downloading.
+
+### Dataset Sufficiency and Alternatives
+
+The FAU dataset contains 48 base images with various alterations. While sufficient for feature-based methods, deep learning approaches may benefit from additional datasets:
+
+- **FAU Dataset**: Good for feature-based methods, evaluation, and transfer learning
+- **For more diversity**: See `DATASET_RECOMMENDATIONS.md` for alternative datasets:
+  - **CoMoFoD**: 200 forged + 200 authentic images
+  - **CASIA v2.0**: 12,614 images (largest available)
+  - **MICC-F220/F600**: 220-600 images with ready train/test splits
+
+**Recommendation**: Start with FAU dataset, then combine with CoMoFoD or MICC datasets for deep learning training if needed.
+
 
 ## Contributing
 

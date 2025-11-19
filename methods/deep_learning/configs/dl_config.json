@@ -1,0 +1,65 @@
+{
+  "model_settings": {
+    "image_size": [512, 512],
+    "num_channels": 3,
+    "num_classes": 2,
+    "batch_size": 8,
+    "learning_rate": 0.0001,
+    "num_epochs": 50,
+    "device": "cuda"
+  },
+  "model1_unet": {
+    "name": "U-Net Segmentation Model",
+    "encoder": "resnet34",
+    "encoder_weights": "imagenet",
+    "activation": "sigmoid",
+    "loss": "bce_with_logits",
+    "optimizer": "adam",
+    "save_best_only": true,
+    "patience": 5
+  },
+  "model2_resnet": {
+    "name": "ResNet Encoder-Decoder Model",
+    "backbone": "resnet50",
+    "backbone_weights": "imagenet",
+    "decoder_channels": [256, 128, 64, 32, 16],
+    "activation": "sigmoid",
+    "loss": "dice",
+    "optimizer": "adam",
+    "save_best_only": true,
+    "patience": 5
+  },
+  "data_paths": {
+    "train_images": "../../../data/processed/train/images",
+    "train_masks": "../../../data/processed/train/masks",
+    "val_images": "../../../data/processed/val/images",
+    "val_masks": "../../../data/processed/val/masks",
+    "test_images": "../../../data/processed/test/images",
+    "test_masks": "../../../data/processed/test/masks"
+  },
+  "output_paths": {
+    "models": "outputs/models",
+    "predictions": "outputs/predictions",
+    "visualizations": "outputs/visualizations",
+    "logs": "outputs/logs"
+  },
+  "results_paths": {
+    "metrics": "results/metrics",
+    "comparisons": "results/comparisons"
+  },
+  "augmentation": {
+    "enabled": true,
+    "rotation_range": 15,
+    "horizontal_flip": true,
+    "vertical_flip": false,
+    "brightness_range": [0.8, 1.2],
+    "contrast_range": [0.8, 1.2],
+    "gaussian_noise": 0.01
+  },
+  "evaluation": {
+    "metrics": ["iou", "dice", "precision", "recall", "f1"],
+    "save_predictions": true,
+    "num_visualizations": 20
+  }
+}
+

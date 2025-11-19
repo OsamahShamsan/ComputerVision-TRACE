@@ -1,0 +1,24 @@
+{
+  "sift_parameters": {
+    "n_features": 0,
+    "contrast_threshold": 0.04,
+    "edge_threshold": 10,
+    "sigma": 1.6
+  },
+  "matching_parameters": {
+    "ratio_threshold": 0.75,
+    "distance_threshold": 50.0,
+    "min_match_count": 4
+  },
+  "data_paths": {
+    "processed_data": "data/processed",
+    "output_dir": "methods/sift/outputs",
+    "results_dir": "methods/sift/results"
+  },
+  "evaluation": {
+    "save_predictions": true,
+    "save_visualizations": true,
+    "compute_metrics": true
+  }
+}
+

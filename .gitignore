@@ -44,6 +44,7 @@ wheels/
 htmlcov/
 .tox/
 .hypothesis/
+data/
 
 # Type checking
 .mypy_cache/
@@ -70,3 +71,7 @@ dmypy.json
 !*.ipynb
 !**/images/
 !explanations/
+
+# Agent instructions (internal use only)
+.agent_instructions.md
+AGENT_INSTRUCTIONS.md
