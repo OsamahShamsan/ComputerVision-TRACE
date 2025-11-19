@@ -56,11 +56,12 @@ dmypy.json
 .env.local
 
 # Model files and large data (uncomment if you have large model files)
-# *.pth
-# *.pt
-# *.h5
-# *.ckpt
-# *.pb
+*.pth
+*.pt
+*.h5
+*.ckpt
+*.pb
+methods/deep_learning/notebooks/outputs/models/
 
 # Temporary files
 *.tmp
